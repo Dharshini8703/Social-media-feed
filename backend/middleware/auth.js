@@ -12,6 +12,33 @@ const generateAccessToken = (id, user_name) => {
     }
 }
 
+const isAuthenticated = async (req, res, next) => {
+    const token = req.header("Authorization")?.split(" ")[1];
+    if (!token) {
+      if (req.file) {
+        deleteImage(req.file.path); 
+      }
+      return res.status(401).json({ 
+        status: false,
+        message: "Access denied, no token has provided"
+      });
+    }
+    try {
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      console.log("decoded---", decoded);
+      req.user = decoded;
+      next();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        status: false, 
+        message: "JsonWebTokenError",
+        error: error.message
+      });
+    }
+  }
+
 export {
-    generateAccessToken
+    generateAccessToken,
+    isAuthenticated
 }

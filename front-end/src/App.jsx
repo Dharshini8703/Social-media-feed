@@ -2,7 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import AppRoutes from './routes/AppRoutes';
-import NavBar from './components/NavBar'; 
+import BottomNavBar from './components/BottomNavBar';
+import Navbar from './components/navbar';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -16,8 +17,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavBar isDarkMode={isDarkMode} setIsDarkMode = {setIsDarkMode}/> 
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode = {setIsDarkMode}/> 
       <AppRoutes /> 
+      <BottomNavBar isDarkMode={isDarkMode} setIsDarkMode = {setIsDarkMode}/>
     </ThemeProvider>
   );
 }
