@@ -6,46 +6,83 @@ import {
   Typography,
   Box,
   Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  CssBaseline,
+  Card,
+  CardContent,
 } from "@mui/material";
-import { Menu as MenuIcon, DarkMode, LightMode } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchBar from "./SearchBar";
 import LoginForm from "./auth/login";
 
-const Navbar = ({isDarkMode, setIsDarkMode}) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
-  
+  const [drawerOpen, setDrawerOpen] = useState(false); 
+
   return (
     <>
-    <AppBar position="fixed" sx={{ backgroundColor: isDarkMode ? "#00CED1" : "#008B8B", }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6" sx={{ textAlign: "start" }}>
-          Social Media
-        </Typography>
+      <CssBaseline />
+      <AppBar position="fixed" sx={{ backgroundColor: "#008B8B", zIndex: 1201 }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ display: { xs: "block", md: "none" } }}
+            onClick={() => setDrawerOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
 
-        <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-          <SearchBar isDarkMode={isDarkMode}/>
+          <Typography variant="h6" sx={{ textAlign: "start" }}>
+            Social Media
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <SearchBar />
+          </Box>
+
+          <Button
+            color="inherit"
+            sx={{ border: "2px solid #FFFFFF", borderRadius: "20px" }}
+            onClick={() => setOpen(true)}
+          >
+            LogIn/SignUp
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      <Box
+        sx={{
+          width: "350px",
+          height: "100vh",
+          position: "fixed",
+          top: "64px", 
+          left: 0,
+          backgroundColor: "#f0f2f5",
+          padding: 2,
+          overflowY: "auto",
+          display: { xs: "none", md: "block" }, 
+        }}
+      >
+       <Typography>Profile Details</Typography>
+        
+      </Box>
+
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <Box sx={{ width: 250, mt: 10 }}>
+         <Typography>Profile Details</Typography>
         </Box>
+      </Drawer>
 
-        <IconButton
-          color="inherit"
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          sx={{marginRight: '10px'}}
-        >
-          {isDarkMode ? <DarkMode /> : <LightMode />}
-        </IconButton>
-
-
-        <Button color="inherit" sx={{border: '2px solid #FFFFFF', borderRadius: '20px'}} onClick={()=> setOpen(true)}>LogIn/SignUp</Button>
-      </Toolbar>
-    </AppBar>
-
-    <LoginForm isOpen={open} onClose={() => setOpen(false)} isDarkMode={isDarkMode}/>
-
-      {/* <div style={{ marginTop: "64px", padding: "20px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>
-          Welcome to My App
-        </Typography>
-      </div> */}
+      <LoginForm isOpen={open} onClose={() => setOpen(false)} />
     </>
   );
 };

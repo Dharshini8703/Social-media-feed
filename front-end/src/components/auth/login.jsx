@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Grid } from '@mui/material';
 import DialogBox from '../DialogBox';
+import SignUpForm from './signUp';
 
-export default function LoginForm({isOpen, onClose, isDarkMode}) {
+export default function LoginForm({isOpen, onClose}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [bio, setBio] = useState('');
   const [error, setError] = useState('');
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,13 +68,31 @@ export default function LoginForm({isOpen, onClose, isDarkMode}) {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ marginTop: 2, backgroundColor: isDarkMode ? "#00CED1" : "#008B8B", }}
+              sx={{ marginTop: 2, backgroundColor: "#008B8B" }}
             >
               Submit
             </Button>
           </Grid>
+          <Grid item xs={12}>
+            <Typography
+              onClick={()=> setOpenSignUp(true)}
+              sx={{
+                marginTop: 2,
+                color: "#008B8B",
+                cursor: "pointer",
+                textAlign: "center",
+                textDecoration: "underline",
+              }}
+            >
+              New User? Sign Up here.
+            </Typography>
+          </Grid>
+
         </Grid>
       </form>
+      <SignUpForm isOpen={openSignUp} onClose={() => {setOpenSignUp(false); onClose();}} />
+      
     </DialogBox>
+    
   );
 }

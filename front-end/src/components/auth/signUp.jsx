@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Grid } from '@mui/material';
 import DialogBox from '../DialogBox';
 
-export default function LoginForm({isOpen, onClose}) {
+export default function SignUpForm({isOpen, onClose}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
@@ -91,11 +91,12 @@ export default function LoginForm({isOpen, onClose}) {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 2, backgroundColor: "#008B8B" }}
             >
               Submit
             </Button>
           </Grid>
+          
         </Grid>
       </form>
     </DialogBox>
