@@ -7,16 +7,12 @@ import {
   Box,
   Button,
   Drawer,
-  List,
-  ListItem,
-  ListItemText,
   CssBaseline,
-  Card,
-  CardContent,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchBar from "./SearchBar";
 import LoginForm from "./auth/login";
+import ProfileSidebar from "./Profile";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -56,20 +52,9 @@ const Navbar = () => {
       </AppBar>
 
       <Box
-        sx={{
-          width: "350px",
-          height: "100vh",
-          position: "fixed",
-          top: "64px", 
-          left: 0,
-          backgroundColor: "#f0f2f5",
-          padding: 2,
-          overflowY: "auto",
-          display: { xs: "none", md: "block" }, 
-        }}
       >
        <Typography>Profile Details</Typography>
-        
+        <ProfileSidebar/>
       </Box>
 
       <Drawer
