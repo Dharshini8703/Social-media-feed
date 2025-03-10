@@ -15,17 +15,29 @@ export const useContextData = () => {
 export const ContextProvider = ({ children }) => {
 
   const [userData, setUserData] = useState([]);
+
   const { axbe } = useAxiosInterceptor();
-  const userRegister = async(body) => {
+  
+  const addUserRegister = async(body) => {
     try{
-
+      const res = await axbe.post('/api/users/register-user', body);
+      return res;
     } catch(error) {
+      throw error;
+    }
+  }
 
+  const loginUser = async(body) => {
+    try{
+      const res = await axbe.post('/api/users/login-user', body);
+      return res;
+    } catch(error) {
+      throw error;
     }
   }
 
   const value = {
-    userData,
+    userData, addUserRegister, loginUser,
   };
 
 
