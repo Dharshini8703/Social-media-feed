@@ -1,29 +1,34 @@
-import React, { createContext, useContext } from 'react';
-import { destinationsData } from '../data/destinations';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import useAxiosInterceptor from './Interceptor';
 
 const Context = createContext(undefined);
 
 export const useContextData = () => {
   const context = useContext(Context);
   if (!context) {
-    throw new Error('useContextData must be used within a DestinationsProvider');
+    throw new Error('useContextData must be used within a ContextProvider');
   }
   return context;
 };
 
-export const DestinationsProvider = ({ children }) => {
-  // Extract unique categories
-  const categories = Array.from(new Set(destinationsData.map(dest => dest.category)));
+export const ContextProvider = ({ children }) => {
 
-  const getDestinationById = (id) => {
-    return destinationsData.find(dest => dest.id === id) || null;
-  };
+  const [userData, setUserData] = useState([]);
+  const { axbe } = useAxiosInterceptor();
+  const userRegister = async(body) => {
+    try{
+
+    } catch(error) {
+
+    }
+  }
 
   const value = {
-    destinations: destinationsData,
-    categories,
-    getDestinationById,
+    userData,
   };
+
+
 
   return (
     <Context.Provider value={value}>
