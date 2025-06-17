@@ -1,5 +1,6 @@
 import express from 'express';
-import { addLike, getAllLikes, getLikeByPost, removeLike } from '../controller/likes_controller';
+import { addLike, getAllLikes, getLikeByPost, removeLike } from '../controller/likes_controller.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 const LikeRouter = express.Router();
 
