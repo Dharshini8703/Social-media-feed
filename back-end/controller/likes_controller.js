@@ -1,5 +1,5 @@
-import { Likes } from "../models/likes_model";
-import { Post } from "../models/post_model";
+import { Likes } from "../models/likes_model.js";
+import { Post } from "../models/post_model.js";
 
 const addLike = async (req, res) => {
     try {

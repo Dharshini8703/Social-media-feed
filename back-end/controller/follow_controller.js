@@ -1,4 +1,4 @@
-import { Follow } from "../models/follow_model";
+import { Follow } from "../models/follow_model.js";
 
 const addFollow = async(req, res) => {
     try {
