@@ -5,11 +5,14 @@ import PostRouter from './routes/post_routes.js';
 import CommentRouter from './routes/comment_routes.js';
 import LiksRouter from './routes/like_routes.js';
 import FollowRouter from './routes/follow_routes.js';
+import cors from 'cors'
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+
+app.use(cors());
 
 app.use('/api/users', UserRouter);
 app.use('/api/post', PostRouter);

@@ -18,7 +18,7 @@ const userRegister = async (req, res) => {
         return res.status(200).json({status: true, message: 'Your Registeration is Successfully Completed', data: user});
     } catch(error) {
         console.error(error);
-        return res.status(500).json({status: false, message: 'Internal Server Error', error});
+        return res.status(500).json({status: false, message: 'Internal Server Error', error: error.message});
     }
 }
 
@@ -36,7 +36,21 @@ const userLogin = async (req, res) => {
         return res.status(200).json({status: true, message: 'Logged in successfully', data: {user, accessToken}});
     } catch(error) {
         console.error(error);
-        return res.status(500).json({status: false, message: 'Internal Server Error', error});
+        return res.status(500).json({status: false, message: 'Internal Server Error', error: error.message});
+    }
+}
+
+const userById = async (req,res) => {
+    try{
+        const id = req.user.id;
+        const user = await User.findOne({where: {id: id}});
+        if(!user) {
+            return res.status(400).json({status: false, message: 'User not found'});
+        }
+        return res.status(200).json({status: true, message: 'Details fetched successfully', data: user});
+    } catch(error) {
+        console.error(error);
+        return res.status(500).json({status: false, message: 'Internal Server Error', error: error.message});
     }
 }
 
@@ -53,12 +67,13 @@ const updateBio = async (req, res) => {
         return res.status(200).json({status: true, message: 'Bio Updated Successfully'});
     } catch(error) {
         console.error(error);
-        return res.status(500).json({status: false, message: 'Internal Server Error', error});
+        return res.status(500).json({status: false, message: 'Internal Server Error', error: error.message});
     }
 }
 
 export {
     userRegister,
     userLogin,
+    userById,
     updateBio
 }
